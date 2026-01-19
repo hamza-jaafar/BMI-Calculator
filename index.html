@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ar">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BMI Calculator</title>
+    <style>
+      /* Body style */
+      body {
+        background: #667eea;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      /* Card style */
+      .bmi-card {
+        background: #fff;
+        padding: 25px;
+        width: 350px;
+        border-radius: 16px;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        text-align: center;
+      }
+
+      .bmi-card h1 {
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .input-group {
+        text-align: left;
+        margin-bottom: 15px;
+      }
+
+      .input-group label {
+        font-size: 14px;
+        color: #555;
+      }
+
+      .input-group input {
+        width: 95%;
+        padding: 10px;
+        margin-top: 5px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+      }
+
+      button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 10px;
+        background: #667eea;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background: #5a67d8;
+      }
+
+      .result {
+        margin-top: 20px;
+      }
+
+      #bminumber {
+        font-size: 36px;
+        margin: 10px 0;
+      }
+
+      #bmiresult {
+        font-size: 16px;
+        font-weight: bold;
+        margin: auto;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bmi-card">
+      <h1>BMI Calculator</h1>
+
+      <div class="input-group">
+        <label>الوزن (kg)</label>
+        <input type="number" id="weight" placeholder="مثال: 70" />
+      </div>
+
+      <div class="input-group">
+        <label>الطول (cm)</label>
+        <input type="number" id="height" placeholder="مثال: 170" />
+      </div>
+
+      <button onclick="resuult()">احسب BMI</button>
+
+      <div class="result">
+        <h2 id="bminumber"></h2>
+        <p id="bmiresult"></p>
+      </div>
+    </div>
+
+    <script>
+      function resuult() {
+        var weight = Number(document.getElementById("weight").value);
+        var height = Number(document.getElementById("height").value);
+
+        if (!weight || !height) {
+          alert("عفاك دخل الوزن والطول");
+          return;
+        }
+
+        var heightInMeter = height / 100;
+        var bmi = weight / (heightInMeter * heightInMeter);
+        bmi = bmi.toFixed(2);
+
+        var bmiresult = document.getElementById("bmiresult");
+        var bminumber = document.getElementById("bminumber");
+
+        bminumber.innerHTML = bmi;
+
+        if (bmi < 18.5) {
+          bmiresult.innerHTML = "نقص في الوزن";
+          bmiresult.style.color = "#f59e0b"; // أصفر برتقالي
+        } else if (bmi < 25) {
+          bmiresult.innerHTML = "وزن صحي";
+          bmiresult.style.color = "#10b981"; // أخضر
+        } else {
+          bmiresult.innerHTML = "زيادة في الوزن";
+          bmiresult.style.color = "#ef4444"; // أحمر
+        }
+      }
+    </script>
+  </body>
+</html>
